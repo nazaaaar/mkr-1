@@ -1,0 +1,25 @@
+<form [formGroup]="matrixForm">
+  <div>
+    <ion-input label="Кількість рядків" min="1" max="10" (ngModelChange)="onRowColCountChange()" type="number" id="numRows" formControlName="numRows"></ion-input>
+  </div>
+  <div>
+    <ion-input label="Кількість стовпців" min="1" max="10" (ngModelChange)="onRowColCountChange()" type="number" id="numCols" formControlName="numCols"></ion-input>
+  </div>
+  <ion-checkbox (ionChange)="onRandomCheckboxChange($event)" id="isRandom" formControlName="isRandom">Заповнити випадковими значеннями</ion-checkbox>
+
+  <div>
+    <ion-input label="Значення для додавання t" type="number" formControlName="incrementValue"></ion-input>
+  </div>
+
+  <ion-grid formArrayName="cellForms">
+    <ion-row *ngFor="let row of getControlsMatrix(); let rowIndex = index" [formArrayName]="rowIndex">
+      <ion-col *ngFor="let cell of getRowControls(getControlsMatrix()[rowIndex]); let colIndex = index" [formGroupName]="colIndex">
+        <ion-item>
+          <ion-input formControlName="value" type="number" placeholder="Value"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="onSubmit()">Підтвердити</ion-button>
+</form>

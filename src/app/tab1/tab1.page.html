@@ -1,17 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Модуль 1. Курей Назарій
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-content>
+  <app-my-form (matrixArrayChange)="onMatrixArrayChange($event)"></app-my-form>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="lowerHalfMean !== null">
+    <p>Середнє значення нижньої половини: {{ lowerHalfMean }}</p>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div *ngIf="increasedMatrix.length > 0">
+    <p>Трансформована матриця:</p>
+    <ion-grid>
+      <ion-row *ngFor="let row of increasedMatrix">
+        <ion-col *ngFor="let cell of row">
+          <ion-item>{{ cell }}</ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
